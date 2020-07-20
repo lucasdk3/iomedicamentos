@@ -1,3 +1,4 @@
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 part 'home_controller.g.dart';
@@ -65,6 +66,19 @@ abstract class _HomeControllerBase with Store {
   String idadeString;
 
   @observable
+  double idade;
+
+  @action
+  void setIdade(String newIdade) {
+    idade = double.parse(newIdade);
+    if (idade >= 16) {
+      idadeString = 'adulto';
+    } else {
+      idadeString = 'criança';
+    }
+  }
+
+  @observable
   int tempo;
 
   @observable
@@ -72,6 +86,11 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   double peso;
+
+  @action
+  void setPeso(String newPeso) {
+    peso = double.parse(newPeso);
+  }
 
   @observable
   TextEditingController idadeController = TextEditingController();
@@ -81,6 +100,9 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   String apresentacaoSelecionada;
+
+  @action
+  Future<dynamic> getNomes(String classeId) {}
 
   @action
   Future<List> getNomesSuggestions(String query) async {

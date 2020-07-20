@@ -283,6 +283,72 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$idadeControllerAtom =
+      Atom(name: '_HomeControllerBase.idadeController');
+
+  @override
+  TextEditingController get idadeController {
+    _$idadeControllerAtom.reportRead();
+    return super.idadeController;
+  }
+
+  @override
+  set idadeController(TextEditingController value) {
+    _$idadeControllerAtom.reportWrite(value, super.idadeController, () {
+      super.idadeController = value;
+    });
+  }
+
+  final _$pesoControllerAtom = Atom(name: '_HomeControllerBase.pesoController');
+
+  @override
+  TextEditingController get pesoController {
+    _$pesoControllerAtom.reportRead();
+    return super.pesoController;
+  }
+
+  @override
+  set pesoController(TextEditingController value) {
+    _$pesoControllerAtom.reportWrite(value, super.pesoController, () {
+      super.pesoController = value;
+    });
+  }
+
+  final _$apresentacaoSelecionadaAtom =
+      Atom(name: '_HomeControllerBase.apresentacaoSelecionada');
+
+  @override
+  String get apresentacaoSelecionada {
+    _$apresentacaoSelecionadaAtom.reportRead();
+    return super.apresentacaoSelecionada;
+  }
+
+  @override
+  set apresentacaoSelecionada(String value) {
+    _$apresentacaoSelecionadaAtom
+        .reportWrite(value, super.apresentacaoSelecionada, () {
+      super.apresentacaoSelecionada = value;
+    });
+  }
+
+  final _$getNomesSuggestionsAsyncAction =
+      AsyncAction('_HomeControllerBase.getNomesSuggestions');
+
+  @override
+  Future<List<dynamic>> getNomesSuggestions(String query) {
+    return _$getNomesSuggestionsAsyncAction
+        .run(() => super.getNomesSuggestions(query));
+  }
+
+  final _$getApresentacaoSuggestionsAsyncAction =
+      AsyncAction('_HomeControllerBase.getApresentacaoSuggestions');
+
+  @override
+  Future<List<dynamic>> getApresentacaoSuggestions(String query) {
+    return _$getApresentacaoSuggestionsAsyncAction
+        .run(() => super.getApresentacaoSuggestions(query));
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -292,6 +358,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
         name: '_HomeControllerBase.changeClasse');
     try {
       return super.changeClasse(newClasse);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setClasse(dynamic classe) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setClasse');
+    try {
+      return super.setClasse(classe);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<String> setMedicamento() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setMedicamento');
+    try {
+      return super.setMedicamento();
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -317,7 +405,10 @@ doseMax: ${doseMax},
 idadeString: ${idadeString},
 tempo: ${tempo},
 doseReferencia: ${doseReferencia},
-peso: ${peso}
+peso: ${peso},
+idadeController: ${idadeController},
+pesoController: ${pesoController},
+apresentacaoSelecionada: ${apresentacaoSelecionada}
     ''';
   }
 }

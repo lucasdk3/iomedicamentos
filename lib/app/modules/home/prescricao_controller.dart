@@ -12,13 +12,13 @@ class PrescricaoController = _PrescricaoControllerBase
 
 abstract class _PrescricaoControllerBase with Store {
   var userController = UserController();
-  var controller = HomeController();
+  final HomeController controller;
   final GetApresentacaoRepository apresentacaoRepository;
   final GetMedicamentosRepository medicamentosRepository;
   final GetNomesRepository nomesRepository;
 
   _PrescricaoControllerBase(this.apresentacaoRepository,
-      this.medicamentosRepository, this.nomesRepository);
+      this.medicamentosRepository, this.nomesRepository, this.controller);
 
   @action
   Future<bool> getNomes(int classeId) async {

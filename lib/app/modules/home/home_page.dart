@@ -2,12 +2,15 @@ import 'package:combos/combos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:iomedicamentos/app/modules/home/prescricao_controller.dart';
 import 'package:iomedicamentos/app/utils/theme.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  final PrescricaoController prescricaoController;
+  const HomePage({Key key, this.title = "Home", this.prescricaoController})
+      : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -36,9 +39,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   Widget textForm(BuildContext context, TextEditingController controller,
-      String validator, String hint) {
+      String validator, String hint, onChanged) {
     return TextFormField(
       controller: controller,
+      onChanged: onChanged,
       validator: (input) {
         if (input.isEmpty) {
           return validator;
@@ -81,6 +85,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       onChanged: (String classeSelecionada) {
                         controller.classe = classeSelecionada;
                         controller.setClasse(classeSelecionada);
+                        widget.prescricaoController
+                            .getNomes(controller.classeId);
                       },
                       value: controller.classe,
                     );
@@ -89,15 +95,25 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Observer(builder: (_) {
-                    return textForm(context, controller.idadeController,
-                        'Por favor, informe a idade do Paciente', 'Idade');
+                    return textForm(
+                        context,
+                        controller.idadeController,
+                        'Por favor, informe a idade do Paciente',
+                        'Idade', () async {
+                      controller.setIdade(controller.idadeController.text);
+                    });
                   }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Observer(builder: (_) {
-                    return textForm(context, controller.pesoController,
-                        'Por favor, informe o peso do Paciente', 'Peso');
+                    return textForm(
+                        context,
+                        controller.pesoController,
+                        'Por favor, informe o peso do Paciente',
+                        'Peso', () async {
+                      controller.setPeso(controller.pesoController.text);
+                    });
                   }),
                 ),
                 Padding(
@@ -114,6 +130,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       onSelectedChanged: (item) async {
                         setState(() {
                           controller.nomeSelecionado = item;
+                          widget.prescricaoController.getApresentacao(
+                              controller.nomeSelecionado,
+                              controller.idadeString,
+                              controller.classeId);
                         });
                       },
                       getItemText: (item) => item,
@@ -174,5 +194,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
-  Future<String> pesquisar() {}
+  Future<String> pesquisar() async {
+    await widget.prescricaoController.getMedicamentos(
+        controller.nomeSelecionado,
+        controller.idadeString,
+        controller.apresentacaoSelecionada,
+        controller.peso,
+        controller.classeId);
+  }
 }

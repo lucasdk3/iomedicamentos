@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1061946519762",
+    "firebase_url": "https://iomedicamentos.firebaseio.com",
+    "project_id": "iomedicamentos",
+    "storage_bucket": "iomedicamentos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061946519762:android:bc0ff4ce1b2d7eec38bd0b",
+        "android_client_info": {
+          "package_name": "com.example.iomedicamentos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061946519762-iml2rgbqjjqkr0pi45afa5a8q3eqgd0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCZKmGJlJI5KFaaIdfZKa9Zg1PHvFFhgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061946519762-iml2rgbqjjqkr0pi45afa5a8q3eqgd0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
