@@ -238,6 +238,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$idadeAtom = Atom(name: '_HomeControllerBase.idade');
+
+  @override
+  double get idade {
+    _$idadeAtom.reportRead();
+    return super.idade;
+  }
+
+  @override
+  set idade(double value) {
+    _$idadeAtom.reportWrite(value, super.idade, () {
+      super.idade = value;
+    });
+  }
+
   final _$tempoAtom = Atom(name: '_HomeControllerBase.tempo');
 
   @override
@@ -375,6 +390,39 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void setIdade(String newIdade) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setIdade');
+    try {
+      return super.setIdade(newIdade);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPeso(String newPeso) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setPeso');
+    try {
+      return super.setPeso(newPeso);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> getNomes(String classeId) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getNomes');
+    try {
+      return super.getNomes(classeId);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   Future<String> setMedicamento() {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.setMedicamento');
@@ -403,6 +451,7 @@ tipoApresentacao: ${tipoApresentacao},
 observacao: ${observacao},
 doseMax: ${doseMax},
 idadeString: ${idadeString},
+idade: ${idade},
 tempo: ${tempo},
 doseReferencia: ${doseReferencia},
 peso: ${peso},

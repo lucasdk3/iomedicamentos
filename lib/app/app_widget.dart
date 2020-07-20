@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:iomedicamentos/app/modules/home/home_controller.dart';
-import 'package:iomedicamentos/app/modules/home/prescricao_controller.dart';
 import 'package:provider/provider.dart';
 
 class AppWidget extends StatelessWidget {

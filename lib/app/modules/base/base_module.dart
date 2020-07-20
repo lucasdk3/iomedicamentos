@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dio/dio.dart';
+import 'package:iomedicamentos/app/modules/base/base_page.dart';
 import 'package:iomedicamentos/app/modules/home/home_controller.dart';
 import 'package:iomedicamentos/app/modules/home/home_page.dart';
 import 'package:iomedicamentos/app/modules/home/prescricao_controller.dart';
@@ -35,7 +36,10 @@ class BaseModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [];
+  List<Router> get routers => [
+        Router(Modular.initialRoute, child: (_, args) => BasePage()),
+        Router('/', child: (_, args) => BasePage()),
+      ];
 
   static Inject get to => Inject<BaseModule>.of();
 }

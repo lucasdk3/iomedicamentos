@@ -21,6 +21,9 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  fluttertoast: ^7.0.1
+  line_awesome_icons: ^1.0.4+2
+  after_layout: ^1.0.7+2
   firebase: ^7.3.0
   firebase_core: ^0.4.5
   firebase_auth: ^0.16.1
@@ -55,6 +58,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/
 scripts: 
 
     mobx_watch: flutter clean & flutter pub get & flutter pub run build_runner watch --delete-conflicting-outputs

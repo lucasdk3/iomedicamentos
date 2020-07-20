@@ -9,39 +9,64 @@ part of 'user_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserController on _UserControllerBase, Store {
-  final _$valueAtom = Atom(name: '_UserControllerBase.value');
+  final _$firebaseAuthAtom = Atom(name: '_UserControllerBase.firebaseAuth');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  FirebaseAuth get firebaseAuth {
+    _$firebaseAuthAtom.reportRead();
+    return super.firebaseAuth;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set firebaseAuth(FirebaseAuth value) {
+    _$firebaseAuthAtom.reportWrite(value, super.firebaseAuth, () {
+      super.firebaseAuth = value;
     });
   }
 
-  final _$_UserControllerBaseActionController =
-      ActionController(name: '_UserControllerBase');
+  final _$logadoAtom = Atom(name: '_UserControllerBase.logado');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
-        name: '_UserControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_UserControllerBaseActionController.endAction(_$actionInfo);
-    }
+  bool get logado {
+    _$logadoAtom.reportRead();
+    return super.logado;
+  }
+
+  @override
+  set logado(bool value) {
+    _$logadoAtom.reportWrite(value, super.logado, () {
+      super.logado = value;
+    });
+  }
+
+  final _$currentUserAtom = Atom(name: '_UserControllerBase.currentUser');
+
+  @override
+  FirebaseUser get currentUser {
+    _$currentUserAtom.reportRead();
+    return super.currentUser;
+  }
+
+  @override
+  set currentUser(FirebaseUser value) {
+    _$currentUserAtom.reportWrite(value, super.currentUser, () {
+      super.currentUser = value;
+    });
+  }
+
+  final _$setUserAsyncAction = AsyncAction('_UserControllerBase.setUser');
+
+  @override
+  Future<bool> setUser() {
+    return _$setUserAsyncAction.run(() => super.setUser());
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+firebaseAuth: ${firebaseAuth},
+logado: ${logado},
+currentUser: ${currentUser}
     ''';
   }
 }
