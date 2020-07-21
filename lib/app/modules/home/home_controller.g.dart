@@ -346,11 +346,34 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  final _$getClasseAsyncAction = AsyncAction('_HomeControllerBase.getClasse');
+  final _$resultadoAtom = Atom(name: '_HomeControllerBase.resultado');
 
   @override
-  Future<dynamic> getClasse(String classe) {
-    return _$getClasseAsyncAction.run(() => super.getClasse(classe));
+  String get resultado {
+    _$resultadoAtom.reportRead();
+    return super.resultado;
+  }
+
+  @override
+  set resultado(String value) {
+    _$resultadoAtom.reportWrite(value, super.resultado, () {
+      super.resultado = value;
+    });
+  }
+
+  final _$dosagemAtom = Atom(name: '_HomeControllerBase.dosagem');
+
+  @override
+  double get dosagem {
+    _$dosagemAtom.reportRead();
+    return super.dosagem;
+  }
+
+  @override
+  set dosagem(double value) {
+    _$dosagemAtom.reportWrite(value, super.dosagem, () {
+      super.dosagem = value;
+    });
   }
 
   final _$setClasseAsyncAction = AsyncAction('_HomeControllerBase.setClasse');
@@ -358,6 +381,20 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   Future<int> setClasse(String classe) {
     return _$setClasseAsyncAction.run(() => super.setClasse(classe));
+  }
+
+  final _$setIdadeAsyncAction = AsyncAction('_HomeControllerBase.setIdade');
+
+  @override
+  Future<String> setIdade(String newIdade) {
+    return _$setIdadeAsyncAction.run(() => super.setIdade(newIdade));
+  }
+
+  final _$getNomesAsyncAction = AsyncAction('_HomeControllerBase.getNomes');
+
+  @override
+  Future<dynamic> getNomes(int classeId) {
+    return _$getNomesAsyncAction.run(() => super.getNomes(classeId));
   }
 
   final _$getNomesSuggestionsAsyncAction =
@@ -378,6 +415,14 @@ mixin _$HomeController on _HomeControllerBase, Store {
         .run(() => super.getApresentacaoSuggestions(query));
   }
 
+  final _$setMedicamentoAsyncAction =
+      AsyncAction('_HomeControllerBase.setMedicamento');
+
+  @override
+  Future<String> setMedicamento() {
+    return _$setMedicamentoAsyncAction.run(() => super.setMedicamento());
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -393,44 +438,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
-  void setIdade(String newIdade) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.setIdade');
-    try {
-      return super.setIdade(newIdade);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setPeso(String newPeso) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.setPeso');
     try {
       return super.setPeso(newPeso);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> getNomes(String classeId) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.getNomes');
-    try {
-      return super.getNomes(classeId);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<String> setMedicamento() {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.setMedicamento');
-    try {
-      return super.setMedicamento();
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -460,7 +472,9 @@ doseReferencia: ${doseReferencia},
 peso: ${peso},
 idadeController: ${idadeController},
 pesoController: ${pesoController},
-apresentacaoSelecionada: ${apresentacaoSelecionada}
+apresentacaoSelecionada: ${apresentacaoSelecionada},
+resultado: ${resultado},
+dosagem: ${dosagem}
     ''';
   }
 }

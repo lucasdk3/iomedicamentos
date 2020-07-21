@@ -1,3 +1,4 @@
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mobx/mobx.dart';
 
 part 'mais_controller.g.dart';
@@ -5,11 +6,7 @@ part 'mais_controller.g.dart';
 class MaisController = _MaisControllerBase with _$MaisController;
 
 abstract class _MaisControllerBase with Store {
-  @observable
-  int value = 0;
+  final HasuraConnect _hasuraConnect;
 
-  @action
-  void increment() {
-    value++;
-  }
+  _MaisControllerBase(this._hasuraConnect);
 }

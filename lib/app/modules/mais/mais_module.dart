@@ -5,9 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class MaisModule extends WidgetModule {
   @override
-  List<Bind> get binds => [
-        Bind((i) => MaisController()),
-      ];
+  List<Bind> get binds => [];
 
   @override
   List<Router> get routers => [

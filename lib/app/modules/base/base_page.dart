@@ -30,20 +30,22 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
   }
 
   Widget bottomNav() {
-    return BottomNavigationBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        currentIndex: controller.currentIndex,
-        onTap: (value) => controller.updateCurrentIndex(value),
-        selectedItemColor: Colors.blue,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(LineAwesomeIcons.trophy),
-              title: Text('Mais pesquisados')),
-          BottomNavigationBarItem(
-              icon: Icon(LineAwesomeIcons.home), title: Text('Home')),
-          BottomNavigationBarItem(
-              icon: Icon(LineAwesomeIcons.paste), title: Text('Sobre'))
-        ]);
+    return Observer(builder: (_) {
+      return BottomNavigationBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          currentIndex: controller.currentIndex,
+          onTap: (value) => controller.updateCurrentIndex(value),
+          selectedItemColor: Colors.blue,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(LineAwesomeIcons.trophy),
+                title: Text('Mais pesquisados')),
+            BottomNavigationBarItem(
+                icon: Icon(LineAwesomeIcons.home), title: Text('Home')),
+            BottomNavigationBarItem(
+                icon: Icon(LineAwesomeIcons.paste), title: Text('Sobre'))
+          ]);
+    });
   }
 }
