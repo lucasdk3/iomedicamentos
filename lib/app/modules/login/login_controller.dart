@@ -56,10 +56,13 @@ abstract class _LoginControllerBase with Store {
     return validate() == null;
   }
 
+  @observable
+  FirebaseUser user;
+
   @action
-  void logar(String email, String senha) async {
+  Future<FirebaseUser> logar(String email, String senha) async {
     try {
-      FirebaseUser user = (await FirebaseAuth.instance
+      user = (await FirebaseAuth.instance
               .signInWithEmailAndPassword(email: email, password: senha))
           .user;
       Fluttertoast.showToast(msg: 'Logado com sucesso');
@@ -68,5 +71,6 @@ abstract class _LoginControllerBase with Store {
       print(e);
       Fluttertoast.showToast(msg: e);
     }
+    return user;
   }
 }

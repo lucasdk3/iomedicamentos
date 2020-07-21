@@ -138,7 +138,27 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$userAtom = Atom(name: '_LoginControllerBase.user');
+
+  @override
+  FirebaseUser get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(FirebaseUser value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   final _$logarAsyncAction = AsyncAction('_LoginControllerBase.logar');
+
+  @override
+  Future<FirebaseUser> logar(String email, String senha) {
+    return _$logarAsyncAction.run(() => super.logar(email, senha));
+  }
 
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
@@ -176,6 +196,7 @@ senha: ${senha},
 senhaObscure: ${senhaObscure},
 box1: ${box1},
 box2: ${box2},
+user: ${user},
 isValid: ${isValid}
     ''';
   }

@@ -21,25 +21,28 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   GlobalKey _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(widget.title, style: appBarText),
           elevation: 0,
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
         ),
-        body: Stack(
-          children: [
-            forms(),
-            button(),
-          ],
-        ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [],
+          ),
+        ));
   }
 
-  Widget textForm(BuildContext context, TextEditingController controller,
-      String validator, String hint, onChanged) {
+  Widget textForm(
+      {BuildContext context,
+      TextEditingController controller,
+      String validator,
+      String hint,
+      onChanged}) {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
@@ -50,6 +53,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       },
       style: letraPreta,
       decoration: InputDecoration(
+        border: OutlineInputBorder(),
         hintText: hint,
       ),
     );
@@ -73,22 +77,31 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Observer(builder: (_) {
-                    return DropdownButton(
-                      items: classes.map((String dropDowmStringItem) {
-                        return DropdownMenuItem<String>(
-                          value: dropDowmStringItem,
-                          child: Text(dropDowmStringItem),
-                        );
-                      }).toList(),
-                      onChanged: (String classeSelecionada) {
-                        controller.classe = classeSelecionada;
-                        controller.setClasse(classeSelecionada);
-                        widget.prescricaoController
-                            .getNomes(controller.classeId);
-                      },
-                      value: controller.classe,
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7.0),
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: DropdownButton(
+                        isExpanded: true,
+                        underline: SizedBox(),
+                        items: classes.map((String dropDowmStringItem) {
+                          return DropdownMenuItem<String>(
+                            value: dropDowmStringItem,
+                            child: Text(dropDowmStringItem),
+                          );
+                        }).toList(),
+                        onChanged: (String classeSelecionada) {
+                          controller.classe = classeSelecionada;
+                          controller.setClasse(classeSelecionada);
+                          widget.prescricaoController
+                              .getNomes(controller.classeId);
+                        },
+                        hint: Text('Escolha uma classe'),
+                        value: controller.classe,
+                      ),
                     );
                   }),
                 ),
@@ -96,24 +109,24 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   padding: const EdgeInsets.all(8.0),
                   child: Observer(builder: (_) {
                     return textForm(
-                        context,
-                        controller.idadeController,
-                        'Por favor, informe a idade do Paciente',
-                        'Idade', () async {
-                      controller.setIdade(controller.idadeController.text);
-                    });
+                      context: context,
+                      controller: controller.idadeController,
+                      validator: 'Por favor, informe a idade do Paciente',
+                      hint: 'Idade',
+                      onChanged: controller.setIdade,
+                    );
                   }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Observer(builder: (_) {
                     return textForm(
-                        context,
-                        controller.pesoController,
-                        'Por favor, informe o peso do Paciente',
-                        'Peso', () async {
-                      controller.setPeso(controller.pesoController.text);
-                    });
+                      context: context,
+                      controller: controller.pesoController,
+                      validator: 'Por favor, informe o peso do Paciente',
+                      hint: 'Peso',
+                      onChanged: controller.setPeso,
+                    );
                   }),
                 ),
                 Padding(
@@ -139,6 +152,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       getItemText: (item) => item,
                       decoration: const InputDecoration(
                         hintText: 'Medicamento',
+                        border: OutlineInputBorder(),
                       ),
                     );
                   }),
@@ -163,6 +177,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       getItemText: (item) => item,
                       decoration: const InputDecoration(
                         hintText: 'Apresentação',
+                        border: OutlineInputBorder(),
                       ),
                     );
                   }),
@@ -174,32 +189,46 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   Widget button() {
-    return MaterialButton(
-      onPressed: () async {
-        var resultado = await pesquisar();
-      },
-      highlightColor: Colors.transparent,
-      splashColor: Colors.lightBlueAccent,
-      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
-        child: Text(
-          "Agendar",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25.0,
+    return Center(
+      child: Stack(
+        children: [
+          Container(
+            decoration: buttonDecoration,
+            child: Visibility(
+              visible: true,
+              child: MaterialButton(
+                onPressed: () async {
+                  var resultado = await pesquisar();
+                },
+                highlightColor: Colors.transparent,
+                splashColor: Colors.lightBlueAccent,
+                //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 42.0),
+                  child: Text(
+                    "Agendar",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   Future<String> pesquisar() async {
-    await widget.prescricaoController.getMedicamentos(
+    String resultado = await widget.prescricaoController.getMedicamentos(
         controller.nomeSelecionado,
         controller.idadeString,
         controller.apresentacaoSelecionada,
         controller.peso,
         controller.classeId);
+    return resultado;
   }
 }

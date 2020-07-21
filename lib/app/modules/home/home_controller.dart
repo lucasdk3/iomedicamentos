@@ -1,4 +1,4 @@
-import 'package:hasura_connect/hasura_connect.dart';
+import 'package:iomedicamentos/app/modules/home/prescricao_controller.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 part 'home_controller.g.dart';
@@ -6,6 +6,10 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  final PrescricaoController prescricaoController;
+
+  _HomeControllerBase(this.prescricaoController);
+
   @observable
   String classe;
 
@@ -16,7 +20,15 @@ abstract class _HomeControllerBase with Store {
   int classeId;
 
   @action
-  void setClasse(classe) {
+  Future<dynamic> getClasse(String classe) async {
+    classe = classe;
+    classeId = await setClasse(classe);
+    prescricaoController.getNomes(classeId);
+    return null;
+  }
+
+  @action
+  Future<int> setClasse(String classe) async {
     if (classe == 'Anestésico') {
       classeId = 1;
     } else if (classe == 'Profilaxia antibiótica') {
@@ -24,6 +36,7 @@ abstract class _HomeControllerBase with Store {
     } else {
       classeId = 3;
     }
+    return classeId;
   }
 
   @observable

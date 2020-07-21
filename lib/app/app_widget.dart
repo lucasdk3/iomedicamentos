@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/modules/base/base_controller.dart';
-import 'package:iomedicamentos/app/modules/home/home_controller.dart';
 import 'package:provider/provider.dart';
 
 class AppWidget extends StatelessWidget {
@@ -10,7 +9,6 @@ class AppWidget extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<BaseController>(create: (_) => BaseController()),
-        Provider<HomeController>(create: (_) => HomeController()),
       ],
       child: MaterialApp(
         navigatorKey: Modular.navigatorKey,

@@ -31,6 +31,8 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
 
   Widget bottomNav() {
     return BottomNavigationBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
         currentIndex: controller.currentIndex,
         onTap: (value) => controller.updateCurrentIndex(value),
         selectedItemColor: Colors.blue,

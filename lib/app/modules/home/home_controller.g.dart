@@ -346,6 +346,20 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$getClasseAsyncAction = AsyncAction('_HomeControllerBase.getClasse');
+
+  @override
+  Future<dynamic> getClasse(String classe) {
+    return _$getClasseAsyncAction.run(() => super.getClasse(classe));
+  }
+
+  final _$setClasseAsyncAction = AsyncAction('_HomeControllerBase.setClasse');
+
+  @override
+  Future<int> setClasse(String classe) {
+    return _$setClasseAsyncAction.run(() => super.setClasse(classe));
+  }
+
   final _$getNomesSuggestionsAsyncAction =
       AsyncAction('_HomeControllerBase.getNomesSuggestions');
 
@@ -373,17 +387,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
         name: '_HomeControllerBase.changeClasse');
     try {
       return super.changeClasse(newClasse);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setClasse(dynamic classe) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.setClasse');
-    try {
-      return super.setClasse(classe);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

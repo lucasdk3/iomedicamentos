@@ -15,7 +15,7 @@ class BaseModule extends ChildModule {
   List<Bind> get binds => [
         Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => FirebaseAuth.instance),
-        Bind((i) => HomeController()),
+        Bind((i) => HomeController(i.get<PrescricaoController>())),
         Bind((i) => HomePage(
               prescricaoController: i.get<PrescricaoController>(),
             )),

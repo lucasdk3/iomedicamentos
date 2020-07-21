@@ -1,6 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:iomedicamentos/app/modules/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'home_page.dart';
 
 class HomeModule extends WidgetModule {
   @override
