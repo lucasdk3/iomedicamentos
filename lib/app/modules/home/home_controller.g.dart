@@ -346,6 +346,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$nomeIdAtom = Atom(name: '_HomeControllerBase.nomeId');
+
+  @override
+  int get nomeId {
+    _$nomeIdAtom.reportRead();
+    return super.nomeId;
+  }
+
+  @override
+  set nomeId(int value) {
+    _$nomeIdAtom.reportWrite(value, super.nomeId, () {
+      super.nomeId = value;
+    });
+  }
+
   final _$resultadoAtom = Atom(name: '_HomeControllerBase.resultado');
 
   @override
@@ -423,6 +438,30 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$setMedicamentoAsyncAction.run(() => super.setMedicamento());
   }
 
+  final _$setRankingAsyncAction = AsyncAction('_HomeControllerBase.setRanking');
+
+  @override
+  Future<dynamic> setRanking(int id, String userId) {
+    return _$setRankingAsyncAction.run(() => super.setRanking(id, userId));
+  }
+
+  final _$setNewRankingAsyncAction =
+      AsyncAction('_HomeControllerBase.setNewRanking');
+
+  @override
+  Future<dynamic> setNewRanking(int id, String userId) {
+    return _$setNewRankingAsyncAction
+        .run(() => super.setNewRanking(id, userId));
+  }
+
+  final _$updateRankingAsyncAction =
+      AsyncAction('_HomeControllerBase.updateRanking');
+
+  @override
+  Future<dynamic> updateRanking(int id) {
+    return _$updateRankingAsyncAction.run(() => super.updateRanking(id));
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -473,6 +512,7 @@ peso: ${peso},
 idadeController: ${idadeController},
 pesoController: ${pesoController},
 apresentacaoSelecionada: ${apresentacaoSelecionada},
+nomeId: ${nomeId},
 resultado: ${resultado},
 dosagem: ${dosagem}
     ''';

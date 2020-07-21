@@ -54,6 +54,21 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
+  final _$uidAtom = Atom(name: '_UserControllerBase.uid');
+
+  @override
+  String get uid {
+    _$uidAtom.reportRead();
+    return super.uid;
+  }
+
+  @override
+  set uid(String value) {
+    _$uidAtom.reportWrite(value, super.uid, () {
+      super.uid = value;
+    });
+  }
+
   final _$setUserAsyncAction = AsyncAction('_UserControllerBase.setUser');
 
   @override
@@ -61,12 +76,20 @@ mixin _$UserController on _UserControllerBase, Store {
     return _$setUserAsyncAction.run(() => super.setUser());
   }
 
+  final _$setUidAsyncAction = AsyncAction('_UserControllerBase.setUid');
+
+  @override
+  Future<String> setUid() {
+    return _$setUidAsyncAction.run(() => super.setUid());
+  }
+
   @override
   String toString() {
     return '''
 firebaseAuth: ${firebaseAuth},
 logado: ${logado},
-currentUser: ${currentUser}
+currentUser: ${currentUser},
+uid: ${uid}
     ''';
   }
 }

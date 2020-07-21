@@ -199,25 +199,22 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         children: [
           Container(
             decoration: buttonDecoration,
-            child: Visibility(
-              visible: true,
-              child: MaterialButton(
-                onPressed: () async {
-                  var resultado = await pesquisar();
-                  showAlertDialog1(context, resultado);
-                },
-                highlightColor: Colors.transparent,
-                splashColor: Colors.lightBlueAccent,
-                //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 42.0),
-                  child: Text(
-                    "Agendar",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.0,
-                    ),
+            child: MaterialButton(
+              onPressed: () async {
+                var resultado = await pesquisar();
+                showAlertDialog1(context, resultado);
+              },
+              highlightColor: Colors.transparent,
+              splashColor: Colors.lightBlueAccent,
+              //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 42.0),
+                child: Text(
+                  "Agendar",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.0,
                   ),
                 ),
               ),

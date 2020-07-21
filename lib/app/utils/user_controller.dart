@@ -15,6 +15,9 @@ abstract class _UserControllerBase with Store {
   @observable
   FirebaseUser currentUser;
 
+  @observable
+  String uid;
+
   @action
   Future<bool> setUser() async {
     try {
@@ -28,5 +31,20 @@ abstract class _UserControllerBase with Store {
       print(e);
     }
     return logado;
+  }
+
+  @action
+  Future<String> setUid() async {
+    try {
+      currentUser = await firebaseAuth.currentUser();
+      if (currentUser == null) {
+        uid = currentUser.uid;
+      } else {
+        uid = 'null';
+      }
+    } catch (e) {
+      print(e);
+    }
+    return uid;
   }
 }
