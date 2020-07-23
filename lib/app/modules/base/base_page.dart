@@ -5,6 +5,7 @@ import 'package:iomedicamentos/app/modules/home/home_module.dart';
 import 'package:iomedicamentos/app/modules/mais/mais_module.dart';
 import 'package:iomedicamentos/app/modules/sobre/sobre_module.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:provider/provider.dart';
 import 'base_controller.dart';
 
 class BasePage extends StatefulWidget {
@@ -15,12 +16,13 @@ class BasePage extends StatefulWidget {
   _BasePageState createState() => _BasePageState();
 }
 
-class _BasePageState extends ModularState<BasePage, BaseController> {
+class _BasePageState extends State<BasePage> {
   //use 'controller' variable to access controller
   List widgetOptions = [MaisModule(), HomeModule(), SobreModule()];
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<BaseController>(context);
     return Scaffold(
       body: Observer(builder: (_) {
         return widgetOptions.elementAt(controller.currentIndex);
@@ -31,6 +33,7 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
 
   Widget bottomNav() {
     return Observer(builder: (_) {
+      final controller = Provider.of<BaseController>(context);
       return BottomNavigationBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,

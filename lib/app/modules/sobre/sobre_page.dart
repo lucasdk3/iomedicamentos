@@ -19,7 +19,6 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title, style: appBarText),
         elevation: 0,

@@ -68,6 +68,8 @@ abstract class _LoginControllerBase with Store {
       Fluttertoast.showToast(msg: 'Logado com sucesso');
       Modular.to.pushReplacementNamed('/login/base');
     } catch (e) {
+      Fluttertoast.showToast(
+          msg: 'Email ou senha inválidos', backgroundColor: Colors.blue);
       print(e);
       Fluttertoast.showToast(msg: e);
     }

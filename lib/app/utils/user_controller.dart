@@ -38,7 +38,7 @@ abstract class _UserControllerBase with Store {
     try {
       currentUser = await firebaseAuth.currentUser();
       if (currentUser == null) {
-        uid = currentUser.uid;
+        uid = currentUser.uid.toString();
       } else {
         uid = 'null';
       }

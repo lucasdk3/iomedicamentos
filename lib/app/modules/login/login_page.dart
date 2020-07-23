@@ -21,23 +21,25 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            logo(),
-            SizedBox(
-              height: 40,
-            ),
-            Stack(
-              children: [
-                forms(),
-                buttons(),
-              ],
-            ),
-            buttons2(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              logo(),
+              SizedBox(
+                height: 40,
+              ),
+              Stack(
+                children: [
+                  forms(),
+                  buttons(),
+                ],
+              ),
+              buttons2(),
+            ],
+          ),
         ));
   }
 

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:iomedicamentos/app/modules/mais/mais_model.dart';
 import 'package:iomedicamentos/app/utils/user_controller.dart';
 import 'package:mobx/mobx.dart';
 
@@ -8,24 +10,30 @@ class MaisController = _MaisControllerBase with _$MaisController;
 
 abstract class _MaisControllerBase with Store {
   final HasuraConnect _hasuraConnect;
+  final FirebaseAuth auth;
 
-  _MaisControllerBase(this._hasuraConnect) {
+  _MaisControllerBase(this._hasuraConnect, this.auth) {
     getRanking();
   }
+
+  @observable
+  List<MaisModel> listItens = [];
 
   UserController _userController = UserController();
 
   @action
   Future<dynamic> getRanking() async {
-    String userId = await _userController.setUid();
-    getRankingDB(userId);
+    var user = await auth.currentUser();
+    var userId = user.uid;
+    print(userId);
+    getRankingDB(userId).then((data) => listItens = data);
   }
 
   @action
-  Future<dynamic> getRankingDB(String userId) async {
+  Future<List<MaisModel>> getRankingDB(String userId) async {
     var query = """
-      query MyQuery {
-        ranking(where: {user_id: {_eq: ""}}, order_by: {quantidade: desc}) {
+      query getRankingDB(\$userId:String!) {
+        ranking(where: {user_id: {_eq: \$userId}}, order_by: {quantidade: desc}) {
           quantidade
           medicamento {
             apresentacao
@@ -40,12 +48,6 @@ abstract class _MaisControllerBase with Store {
       "userId": userId,
     });
 
-    if (doc["data"]["medicamentos"].isEmpty) {
-      print('vazio');
-    } else {
-      for (var document in doc["data"]["medicamentos"]) {
-        int newId = document["id"];
-      }
-    }
+    return MaisModel.fromJsonList(doc["data"]["ranking"] as List);
   }
 }

@@ -89,13 +89,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
       Atom(name: '_HomeControllerBase.doseApresentacao');
 
   @override
-  double get doseApresentacao {
+  int get doseApresentacao {
     _$doseApresentacaoAtom.reportRead();
     return super.doseApresentacao;
   }
 
   @override
-  set doseApresentacao(double value) {
+  set doseApresentacao(int value) {
     _$doseApresentacaoAtom.reportWrite(value, super.doseApresentacao, () {
       super.doseApresentacao = value;
     });
@@ -104,13 +104,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$dosemgAtom = Atom(name: '_HomeControllerBase.dosemg');
 
   @override
-  double get dosemg {
+  int get dosemg {
     _$dosemgAtom.reportRead();
     return super.dosemg;
   }
 
   @override
-  set dosemg(double value) {
+  set dosemg(int value) {
     _$dosemgAtom.reportWrite(value, super.dosemg, () {
       super.dosemg = value;
     });
@@ -361,6 +361,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$idAtom = Atom(name: '_HomeControllerBase.id');
+
+  @override
+  int get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(int value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
   final _$resultadoAtom = Atom(name: '_HomeControllerBase.resultado');
 
   @override
@@ -513,6 +528,7 @@ idadeController: ${idadeController},
 pesoController: ${pesoController},
 apresentacaoSelecionada: ${apresentacaoSelecionada},
 nomeId: ${nomeId},
+id: ${id},
 resultado: ${resultado},
 dosagem: ${dosagem}
     ''';

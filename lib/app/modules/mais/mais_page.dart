@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:iomedicamentos/app/modules/mais/mais_item.dart';
 import 'package:iomedicamentos/app/utils/theme.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'mais_controller.dart';
@@ -24,49 +26,22 @@ class _MaisPageState extends ModularState<MaisPage, MaisController> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
       ),
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.builder(itemBuilder: (_, index) {
-            return Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 2.0,
-                child: Container(
-                  height: 40,
-                  child: ListTile(
-                    title: Text('nome', style: letraPreta),
-                    leading: Center(
-                      child: CircleAvatar(
-                        radius: 24,
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'quantidade',
-                              style: TextStyle(fontSize: 24),
-                            ),
-                            Text('vezes', style: TextStyle(fontSize: 10)),
-                          ],
-                        ),
-                      ),
-                    ),
-                    subtitle: Text('apresentação', style: letraPreta),
-                    trailing: Container(
-                      height: 38,
-                      child: Row(
-                        children: <Widget>[
-                          Text('usar'),
-                          IconButton(
-                              icon: Icon(LineAwesomeIcons.arrow_circle_o_right),
-                              onPressed: () {})
-                        ],
-                      ),
-                    ),
-                  ),
+      body: Observer(builder: (_) {
+        return ListView.builder(
+            itemCount: controller.listItens.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MaisItem(
+                  nome: controller.listItens[index].medicamento.nome,
+                  apresentacao:
+                      controller.listItens[index].medicamento.apresentacao,
+                  classeId: controller.listItens[index].medicamento.classeId,
+                  quantidade: controller.listItens[index].quantidade,
                 ),
-              ),
-            );
-          })),
+              );
+            });
+      }),
     );
   }
 }

@@ -1,18 +1,17 @@
-import 'dart:js';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:iomedicamentos/app/utils/user_controller.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   final HasuraConnect _hasuraConnect;
+  final FirebaseAuth auth;
 
-  _HomeControllerBase(this._hasuraConnect);
+  _HomeControllerBase(this._hasuraConnect, this.auth);
   UserController _userController = UserController();
 
   @observable
@@ -46,10 +45,10 @@ abstract class _HomeControllerBase with Store {
   List<int> listNomesId = [];
 
   @observable
-  double doseApresentacao;
+  int doseApresentacao;
 
   @observable
-  double dosemg;
+  int dosemg;
 
   @observable
   double doseml;
@@ -142,11 +141,12 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<List> getNomesSuggestions(String query) async {
-    List<String> consultasSugestao = List();
-    consultasSugestao.addAll(listNomes);
-    consultasSugestao
+    List<String> nomeSugestao = List();
+    nomeSugestao.clear();
+    nomeSugestao.addAll(listNomes);
+    nomeSugestao
         .retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
-    return consultasSugestao;
+    return nomeSugestao;
   }
 
   Future<dynamic> getApresentacao(
@@ -173,6 +173,9 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   int nomeId;
+
+  @observable
+  int id;
 
   Future<String> getMedicamento(String nome, String idade, String apresentacao,
       double peso, int classeId) async {
@@ -223,10 +226,13 @@ abstract class _HomeControllerBase with Store {
         tempo = document["dose_tempo"];
         doseReferencia = document["dose_refe"];
         nomeId = document["nome_id"];
+        id = document['id'];
         peso = peso;
         resultado = await setMedicamento();
-        var userId = await _userController.setUid();
-        setRanking(nomeId, userId);
+
+        var user = await auth.currentUser();
+        var userId = user.uid;
+        setRanking(id, userId);
       }
     }
     return resultado;
@@ -235,6 +241,7 @@ abstract class _HomeControllerBase with Store {
   @action
   Future<List> getApresentacaoSuggestions(String query) async {
     List<String> apresentacaoSugestao = List();
+    apresentacaoSugestao.clear();
     apresentacaoSugestao.addAll(listApresentacoes);
     apresentacaoSugestao
         .retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
@@ -267,8 +274,9 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<dynamic> setRanking(int id, String userId) async {
+    print(id);
     var query = """
-      query setRanking(\$id:int!,\$userId:String!){
+      query setRanking(\$id:Int!,\$userId:String!){
         ranking(where: {medicamento_id: {_eq: \$id} , user_id: {_eq: \$userId}}) {
           quantidade
           user_id
@@ -281,10 +289,11 @@ abstract class _HomeControllerBase with Store {
       "id": id,
       "userId": userId,
     });
-    if (doc["data"]["medicamentos"].isEmpty) {
+    if (doc["data"]["ranking"].isEmpty) {
+      print('vazio');
       setNewRanking(id, userId);
     } else {
-      for (var document in doc["data"]["medicamentos"]) {
+      for (var document in doc["data"]["ranking"]) {
         int newId = document["id"];
         updateRanking(newId);
       }
@@ -294,7 +303,7 @@ abstract class _HomeControllerBase with Store {
   @action
   Future<dynamic> setNewRanking(int id, String userId) async {
     var query = """
-      mutation setRanking(\$id:int!,\$userId:String!){
+      mutation setRanking(\$id:Int!,\$userId:String!){
         insert_ranking(objects: {quantidade: 1, medicamento_id: \$id, user_id: \$userId}) {
           returning {
             id
@@ -312,7 +321,7 @@ abstract class _HomeControllerBase with Store {
   @action
   Future<dynamic> updateRanking(int id) async {
     var query = """
-      mutation setRanking(\$id:int!){
+      mutation setRanking(\$id:Int!){
         update_ranking(where: {id: {_eq: \$id}}, _inc: {quantidade: 1}) {
           affected_rows
         }

@@ -2,7 +2,9 @@ import 'package:combos/combos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:iomedicamentos/app/utils/theme.dart';
+import 'package:provider/provider.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,11 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
-  GlobalKey _key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(widget.title, style: appBarText),
           elevation: 0,
@@ -75,9 +76,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     'Medicamentos'
   ];
   Widget forms() {
+    final baseController = Provider.of<BaseController>(context);
+    GlobalKey key = GlobalKey<FormState>();
     return Center(
         child: Form(
-      key: _key,
+      key: key,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,12 +107,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         );
                       }).toList(),
                       onChanged: (String classeSelecionada) {
-                        controller.classe = classeSelecionada;
+                        baseController.classe = classeSelecionada;
                         controller.setClasse(classeSelecionada);
                         controller.getNomes(controller.classeId);
                       },
                       hint: Text('Escolha uma classe'),
-                      value: controller.classe,
+                      value: baseController.classe,
                     ),
                   ),
                 );
@@ -143,7 +146,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               padding: const EdgeInsets.all(8.0),
               child: Observer(builder: (_) {
                 return TypeaheadCombo<String>(
-                  selected: controller.nomeSelecionado,
+                  selected: baseController.nome,
                   getList: (text) async {
                     return await controller.getNomesSuggestions(text);
                   },
@@ -152,6 +155,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   onSelectedChanged: (item) async {
                     setState(() {
                       controller.nomeSelecionado = item;
+                      baseController.nome = item;
                       controller.getApresentacao(controller.nomeSelecionado,
                           controller.idadeString, controller.classeId);
                     });
@@ -168,7 +172,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               padding: const EdgeInsets.all(8.0),
               child: Observer(builder: (_) {
                 return TypeaheadCombo<String>(
-                  selected: controller.apresentacaoSelecionada,
+                  selected: baseController.apresentacao,
                   getList: (text) async {
                     return await controller.getApresentacaoSuggestions(text);
                   },
@@ -177,6 +181,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   onSelectedChanged: (item) async {
                     setState(() {
                       controller.apresentacaoSelecionada = item;
+                      baseController.apresentacao = item;
                     });
                   },
                   getItemText: (item) => item,
@@ -236,9 +241,19 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   showAlertDialog1(BuildContext context, String resultado) {
+    BaseController baseController =
+        Provider.of<BaseController>(context, listen: false);
     Widget okButton = FlatButton(
       child: Text("OK"),
-      onPressed: () {},
+      onPressed: () {
+        baseController.updateCurrentIndex(0);
+        baseController.apresentacao = null;
+        baseController.nome = null;
+        baseController.classe = null;
+        controller.idadeController.text = '';
+        controller.pesoController.text = '';
+        Modular.to.pop();
+      },
     );
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
