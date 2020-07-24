@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:iomedicamentos/app/modules/base/base_module.dart';
 import 'package:iomedicamentos/app/modules/login/login_page.dart';
 import 'package:iomedicamentos/app/modules/login/register/register_module.dart';
 import 'package:iomedicamentos/app/modules/login/reset/reset_module.dart';
+import 'package:iomedicamentos/app/utils/customHasuraConnect.dart';
 
 import 'reset/reset_controller.dart';
 import 'register/register_controller.dart';
@@ -11,8 +13,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LoginModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => FirebaseAuth.instance),
+        Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => ResetController()),
-        Bind((i) => RegisterController()),
+        Bind((i) => RegisterController(
+            CustomHasuraConnect.getConnect(i.get<FirebaseAuth>()))),
         Bind((i) => LoginController()),
       ];
 

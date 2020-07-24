@@ -210,7 +210,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
             child: Text(
-              "Agendar",
+              "Entrar",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25.0,
