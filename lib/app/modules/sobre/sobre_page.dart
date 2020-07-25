@@ -40,9 +40,11 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
                 Text(
                   textSobre,
                   textAlign: TextAlign.justify,
-                  style: letraPreta,
+                  style: letraPreta2,
                 ),
-                SizedBox(),
+                SizedBox(
+                  height: 24,
+                ),
                 button(),
               ],
             ),
@@ -68,7 +70,7 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
               child: Text(
-                "Agendar",
+                "Deslogar",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25.0,

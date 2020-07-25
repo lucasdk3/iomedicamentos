@@ -162,7 +162,7 @@ class _ResetPageState extends ModularState<ResetPage, ResetController> {
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
             child: Text(
-              "Entrar",
+              "Resetar",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25.0,

@@ -216,7 +216,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 padding: const EdgeInsets.symmetric(
                     vertical: 10.0, horizontal: 42.0),
                 child: Text(
-                  "Agendar",
+                  "Pesquisar",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25.0,

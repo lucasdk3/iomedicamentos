@@ -23,7 +23,7 @@ class MaisItem extends StatelessWidget {
       elevation: 2.0,
       child: ListTile(
         leading: CircleAvatar(
-          radius: 24,
+          radius: 26,
           backgroundColor: Colors.blue,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -31,10 +31,10 @@ class MaisItem extends StatelessWidget {
             children: <Widget>[
               Text(
                 '$quantidade',
-                style: TextStyle(fontSize: 24, color: Colors.white),
+                style: TextStyle(fontSize: 22, color: Colors.white),
               ),
               Text(
-                'vezes',
+                (quantidade == 1) ? 'vez' : 'vezes',
                 style: TextStyle(fontSize: 10, color: Colors.white),
               ),
             ],

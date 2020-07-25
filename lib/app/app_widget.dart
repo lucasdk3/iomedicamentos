@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         navigatorKey: Modular.navigatorKey,
-        title: 'Flutter Slidy',
+        title: 'iomedicamentos',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

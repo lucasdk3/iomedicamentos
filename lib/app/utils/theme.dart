@@ -12,6 +12,8 @@ TextStyle letraAzul = TextStyle(
     fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.blue);
 TextStyle letraPreta = TextStyle(
     fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.black);
+TextStyle letraPreta2 = TextStyle(
+    fontFamily: "WorkSansSemiBold", fontSize: 20.0, color: Colors.black);
 Color selectedColor = Colors.white;
 Color drawerBackgroundColor = Colors.white10;
 BoxDecoration buttonDecoration = new BoxDecoration(
