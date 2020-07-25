@@ -69,7 +69,7 @@ abstract class _HomeControllerBase with Store {
   String observacao;
 
   @observable
-  String doseMax;
+  int doseMax;
 
   @observable
   String idadeString;
@@ -254,20 +254,66 @@ abstract class _HomeControllerBase with Store {
   @observable
   double dosagem;
 
+  @observable
+  double dose;
+
   @action
   Future<String> setMedicamento() async {
-    if (tipoApresentacao == 'comprimido' ||
-        tipoApresentacao == 'capsula' ||
-        tipoApresentacao == 'comprimido_m' ||
-        tipoApresentacao == 'capsula_m') {
+    if (tipoApresentacao == 'comprimido' || tipoApresentacao == 'capsula') {
       dosagem = dosemg / doseApresentacao;
       if (dosagem > 1) {
         return resultado =
-            'Para esse paciente é indicado $dosagem doses de $tempo em $tempo. fonte: $fonteMed';
+            'Para esse paciente é indicado $dosagem doses, $observacao. Fonte: $fonteMed';
       } else {
         return resultado =
-            'Para esse paciente é indicado $dosagem dose de $tempo em $tempo. fonte: $fonteMed';
+            'Para esse paciente é indicado $dosagem dose, $observacao. Fonte: $fonteMed';
       }
+    } else if (tipoApresentacao == 'injetavel') {
+      dose = doseApresentacao * peso;
+      (dose >= doseMax)
+          ? dosagem = (doseMax * doseml) / dosemg
+          : dosagem = (dose * doseml) / dosemg;
+      return resultado =
+          'Para esse paciente é indicado uma dose de $dosagem, $observacao. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'suspensao') {
+      dose = doseApresentacao * peso;
+      (dose >= doseMax)
+          ? dosagem = (doseMax / 1)
+          : dosagem = (dose * doseml) / dosemg;
+      return resultado =
+          'Para esse paciente é indicado uma dose de $dosagem, $observacao. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'anestesico') {
+      ((doseReferencia * peso) >= doseMax)
+          ? dose = (doseMax / 1)
+          : dose = (doseReferencia * peso);
+      dosagem = dose / (doseApresentacao * 1.8);
+      return resultado =
+          'Para esse paciente é indicado $dosagem tubetes. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'comprimido_m' ||
+        tipoApresentacao == 'capsula_m' ||
+        tipoApresentacao == 'dragea') {
+      dosagem = dosemg / doseApresentacao;
+      if (dosagem > 1) {
+        return resultado =
+            'Para esse paciente é indicado $dosagem doses, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+      } else {
+        return resultado =
+            'Para esse paciente é indicado $dosagem dose, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+      }
+    } else if (tipoApresentacao == 'suspensao_m') {
+      dose = doseApresentacao * peso;
+      dosagem = (dose * doseml) / dosemg / (24 / tempo);
+      return resultado =
+          'Para esse paciente é indicado uma dose de $dosagem, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'solucao_m') {
+      (doseMax <= peso) ? dosagem = (doseMax / 1) : dosagem = peso;
+      return resultado =
+          'Para esse paciente é indicado uma dose de $dosagem, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'elixir') {
+      dose = doseReferencia * peso;
+      dosagem = dose / (dosemg / doseml) / (24 / tempo);
+      return resultado =
+          'Para esse paciente é indicado uma dose de $dosagem, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
     }
     return resultado;
   }

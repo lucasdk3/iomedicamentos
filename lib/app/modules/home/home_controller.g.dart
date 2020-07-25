@@ -211,13 +211,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$doseMaxAtom = Atom(name: '_HomeControllerBase.doseMax');
 
   @override
-  String get doseMax {
+  int get doseMax {
     _$doseMaxAtom.reportRead();
     return super.doseMax;
   }
 
   @override
-  set doseMax(String value) {
+  set doseMax(int value) {
     _$doseMaxAtom.reportWrite(value, super.doseMax, () {
       super.doseMax = value;
     });
@@ -406,6 +406,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$doseAtom = Atom(name: '_HomeControllerBase.dose');
+
+  @override
+  double get dose {
+    _$doseAtom.reportRead();
+    return super.dose;
+  }
+
+  @override
+  set dose(double value) {
+    _$doseAtom.reportWrite(value, super.dose, () {
+      super.dose = value;
+    });
+  }
+
   final _$setClasseAsyncAction = AsyncAction('_HomeControllerBase.setClasse');
 
   @override
@@ -530,7 +545,8 @@ apresentacaoSelecionada: ${apresentacaoSelecionada},
 nomeId: ${nomeId},
 id: ${id},
 resultado: ${resultado},
-dosagem: ${dosagem}
+dosagem: ${dosagem},
+dose: ${dose}
     ''';
   }
 }
