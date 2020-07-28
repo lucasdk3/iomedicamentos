@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:iomedicamentos/app/modules/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

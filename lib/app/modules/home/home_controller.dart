@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:iomedicamentos/app/utils/user_controller.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 part 'home_controller.g.dart';
@@ -12,7 +11,6 @@ abstract class _HomeControllerBase with Store {
   final FirebaseAuth auth;
 
   _HomeControllerBase(this._hasuraConnect, this.auth);
-  UserController _userController = UserController();
 
   @observable
   String classe;

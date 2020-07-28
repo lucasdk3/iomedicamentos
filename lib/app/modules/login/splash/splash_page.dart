@@ -22,7 +22,7 @@ class _SplashPageState extends ModularState<SplashPage, UserController>
 
   void afterFirstLayout(BuildContext context) {
     bool logado = controller.logado;
-    Future.delayed(Duration(seconds: 3)).then((_) {
+    Future.delayed(Duration(seconds: 1)).then((_) {
       if (logado) {
         Modular.to.pushNamed('/base');
       } else {

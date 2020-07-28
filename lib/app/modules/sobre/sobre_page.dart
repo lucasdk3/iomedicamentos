@@ -61,7 +61,7 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
             onPressed: () async {
               var auth = FirebaseAuth.instance;
               auth.signOut();
-              Modular.to.pushNamed('/splash');
+              Modular.to.popAndPushNamed('/login');
             },
             highlightColor: Colors.transparent,
             splashColor: Colors.lightBlueAccent,

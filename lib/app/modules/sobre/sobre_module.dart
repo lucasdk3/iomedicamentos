@@ -1,6 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
+import 'package:iomedicamentos/app/modules/login/login_module.dart';
 import 'package:iomedicamentos/app/modules/sobre/sobre_page.dart';
 
 class SobreModule extends WidgetModule {
@@ -11,6 +11,7 @@ class SobreModule extends WidgetModule {
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => SobrePage()),
         Router('/', child: (_, args) => SobrePage()),
+        Router('/login', module: LoginModule()),
       ];
 
   static Inject get to => Inject<SobreModule>.of();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/modules/home/home_module.dart';
 import 'package:iomedicamentos/app/modules/mais/mais_module.dart';
 import 'package:iomedicamentos/app/modules/sobre/sobre_module.dart';
