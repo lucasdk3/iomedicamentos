@@ -99,6 +99,15 @@ abstract class _HomeControllerBase with Store {
     peso = double.parse(newPeso);
   }
 
+  @action
+  Future<double> getPeso() async {
+    if (peso == null) {
+      return peso = (idade * 2) + 8;
+    } else {
+      return peso;
+    }
+  }
+
   @observable
   TextEditingController idadeController = TextEditingController();
 
@@ -177,6 +186,7 @@ abstract class _HomeControllerBase with Store {
 
   Future<String> getMedicamento(String nome, String idade, String apresentacao,
       double peso, int classeId) async {
+    print(peso);
     listNomes.clear();
     listNomesId.clear();
     var query = """
@@ -225,8 +235,8 @@ abstract class _HomeControllerBase with Store {
         doseReferencia = document["dose_refe"];
         nomeId = document["nome_id"];
         id = document['id'];
-        peso = peso;
-        resultado = await setMedicamento();
+
+        resultado = await setMedicamento(peso);
 
         var user = await auth.currentUser();
         var userId = user.uid;
@@ -256,7 +266,7 @@ abstract class _HomeControllerBase with Store {
   double dose;
 
   @action
-  Future<String> setMedicamento() async {
+  Future<String> setMedicamento(double peso) async {
     if (tipoApresentacao == 'comprimido' || tipoApresentacao == 'capsula') {
       dosagem = dosemg / doseApresentacao;
       if (dosagem > 1) {
@@ -299,7 +309,7 @@ abstract class _HomeControllerBase with Store {
             'Para esse paciente é indicado $dosagem dose, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
       }
     } else if (tipoApresentacao == 'suspensao_m') {
-      dose = doseApresentacao * peso;
+      dose = doseReferencia * peso;
       dosagem = (dose * doseml) / dosemg / (24 / tempo);
       return resultado =
           'Para esse paciente é indicado uma dose de $dosagem, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
@@ -318,7 +328,6 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<dynamic> setRanking(int id, String userId) async {
-    print(id);
     var query = """
       query setRanking(\$id:Int!,\$userId:String!){
         ranking(where: {medicamento_id: {_eq: \$id} , user_id: {_eq: \$userId}}) {

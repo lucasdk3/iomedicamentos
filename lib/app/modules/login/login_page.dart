@@ -182,7 +182,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   text: 'Ainda não tem uma Conta?',
                   style: letraPreta,
                   children: <TextSpan>[
-                    TextSpan(text: 'Clique aqui', style: letraAzul)
+                    TextSpan(text: ' Clique aqui', style: letraAzul)
                   ]),
             ),
           )),

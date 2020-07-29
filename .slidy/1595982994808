@@ -1,0 +1,4 @@
+lib/app/modules/autores/autores_page.dart
+test/app/modules/autores/autores_page_test.dart
+lib/app/modules/autores/autores_controller.dart
+test/app/modules/autores/autores_controller_test.dart

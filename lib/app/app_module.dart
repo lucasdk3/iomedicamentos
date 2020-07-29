@@ -1,3 +1,4 @@
+import 'package:iomedicamentos/app/modules/autores/autores_controller.dart';
 import 'package:iomedicamentos/app/modules/login/splash/splash_module.dart';
 import 'package:iomedicamentos/app/utils/user_controller.dart';
 import 'app_controller.dart';
@@ -10,6 +11,7 @@ import 'modules/sobre/sobre_controller.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => AutoresController()),
         Bind((i) => UserController()),
         Bind((i) => SobreController()),
         Bind((i) => BaseController()),

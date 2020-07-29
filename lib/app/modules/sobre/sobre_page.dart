@@ -45,6 +45,10 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
                 SizedBox(
                   height: 24,
                 ),
+                button1(),
+                SizedBox(
+                  height: 24,
+                ),
                 button(),
               ],
             ),
@@ -71,6 +75,31 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
               child: Text(
                 "Deslogar",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25.0,
+                ),
+              ),
+            )));
+  }
+
+  Widget button1() {
+    return Container(
+        decoration: buttonDecoration,
+        child: MaterialButton(
+            onPressed: () async {
+              var auth = FirebaseAuth.instance;
+              auth.signOut();
+              Modular.to.pushNamed('/autores');
+            },
+            highlightColor: Colors.transparent,
+            splashColor: Colors.lightBlueAccent,
+            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+              child: Text(
+                "Ver Autores",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25.0,

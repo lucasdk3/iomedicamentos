@@ -11,6 +11,7 @@ class AppWidget extends StatelessWidget {
         Provider<BaseController>(create: (_) => BaseController()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         navigatorKey: Modular.navigatorKey,
         title: 'iomedicamentos',
         theme: ThemeData(

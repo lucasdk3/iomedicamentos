@@ -111,7 +111,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         controller.setClasse(classeSelecionada);
                         controller.getNomes(controller.classeId);
                       },
-                      hint: Text('Escolha uma classe'),
+                      hint: Text('Escolha uma classe (obrigatório)'),
                       value: baseController.classe,
                     ),
                   ),
@@ -125,7 +125,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   context: context,
                   controller: controller.idadeController,
                   validator: 'Por favor, informe a idade do Paciente',
-                  hint: 'Idade',
+                  hint: 'Idade em anos (obrigatório)',
                   onChanged: controller.setIdade,
                 );
               }),
@@ -137,7 +137,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   context: context,
                   controller: controller.pesoController,
                   validator: 'Por favor, informe o peso do Paciente',
-                  hint: 'Peso',
+                  hint: 'Peso em Kg, (não obrigatório)',
                   onChanged: controller.setPeso,
                 );
               }),
@@ -162,7 +162,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   },
                   getItemText: (item) => item,
                   decoration: const InputDecoration(
-                    hintText: 'Medicamento',
+                    hintText: 'Medicamento (obrigatório)',
                     border: OutlineInputBorder(),
                   ),
                 );
@@ -186,7 +186,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   },
                   getItemText: (item) => item,
                   decoration: const InputDecoration(
-                    hintText: 'Apresentação',
+                    hintText: 'Apresentação (obrigatório)',
                     border: OutlineInputBorder(),
                   ),
                 );
@@ -231,11 +231,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   Future<String> pesquisar() async {
+    double peso2 = await controller.getPeso();
     String resultado = await controller.getMedicamento(
         controller.nomeSelecionado,
         controller.idadeString,
         controller.apresentacaoSelecionada,
-        controller.peso,
+        peso2,
         controller.classeId);
     return resultado;
   }

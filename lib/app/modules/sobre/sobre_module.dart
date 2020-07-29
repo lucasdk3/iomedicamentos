@@ -1,5 +1,6 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:iomedicamentos/app/modules/autores/autores_module.dart';
 import 'package:iomedicamentos/app/modules/login/login_module.dart';
 import 'package:iomedicamentos/app/modules/sobre/sobre_page.dart';
 
@@ -12,6 +13,7 @@ class SobreModule extends WidgetModule {
         Router(Modular.initialRoute, child: (_, args) => SobrePage()),
         Router('/', child: (_, args) => SobrePage()),
         Router('/login', module: LoginModule()),
+        Router('/autores', module: AutoresModule()),
       ];
 
   static Inject get to => Inject<SobreModule>.of();

@@ -435,6 +435,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$setIdadeAsyncAction.run(() => super.setIdade(newIdade));
   }
 
+  final _$getPesoAsyncAction = AsyncAction('_HomeControllerBase.getPeso');
+
+  @override
+  Future<double> getPeso() {
+    return _$getPesoAsyncAction.run(() => super.getPeso());
+  }
+
   final _$getNomesAsyncAction = AsyncAction('_HomeControllerBase.getNomes');
 
   @override
@@ -464,8 +471,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
       AsyncAction('_HomeControllerBase.setMedicamento');
 
   @override
-  Future<String> setMedicamento() {
-    return _$setMedicamentoAsyncAction.run(() => super.setMedicamento());
+  Future<String> setMedicamento(double peso) {
+    return _$setMedicamentoAsyncAction.run(() => super.setMedicamento(peso));
   }
 
   final _$setRankingAsyncAction = AsyncAction('_HomeControllerBase.setRanking');
