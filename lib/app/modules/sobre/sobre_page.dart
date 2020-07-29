@@ -61,6 +61,7 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
   Widget button() {
     return Container(
         decoration: buttonDecoration,
+        constraints: BoxConstraints(maxWidth: 300),
         child: MaterialButton(
             onPressed: () async {
               var auth = FirebaseAuth.instance;
@@ -86,11 +87,10 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
   Widget button1() {
     return Container(
         decoration: buttonDecoration,
+        constraints: BoxConstraints(maxWidth: 300),
         child: MaterialButton(
             onPressed: () async {
-              var auth = FirebaseAuth.instance;
-              auth.signOut();
-              Modular.to.pushNamed('/autores');
+              showAlertDialog1(context);
             },
             highlightColor: Colors.transparent,
             splashColor: Colors.lightBlueAccent,
@@ -106,5 +106,72 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
                 ),
               ),
             )));
+  }
+
+  showAlertDialog1(BuildContext context) {
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Modular.to.pop();
+      },
+    );
+    // configura o  AlertDialog
+    AlertDialog alerta = AlertDialog(
+      title: Text("Autores", style: letraAzul),
+      content: Column(
+        children: <Widget>[
+          Text(
+            texto1,
+            textAlign: TextAlign.justify,
+            style: letraPreta2,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            texto2,
+            textAlign: TextAlign.justify,
+            style: letraPreta2,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            texto3,
+            textAlign: TextAlign.justify,
+            style: letraPreta2,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            texto4,
+            textAlign: TextAlign.justify,
+            style: letraPreta2,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            texto5,
+            textAlign: TextAlign.justify,
+            style: letraPreta2,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+        ],
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerta;
+      },
+    );
   }
 }
