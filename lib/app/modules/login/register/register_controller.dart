@@ -83,7 +83,7 @@ abstract class _RegisterControllerBase with Store {
           .user;
 
       Fluttertoast.showToast(msg: 'Registrado com sucesso');
-      setUser(nome, email, senha);
+      setUser(email, nome, user.uid);
       Modular.to.pop();
     } catch (e) {
       Fluttertoast.showToast(
