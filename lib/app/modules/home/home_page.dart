@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:iomedicamentos/app/utils/theme.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:provider/provider.dart';
 import 'home_controller.dart';
 
@@ -20,12 +21,25 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final baseController = Provider.of<BaseController>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title, style: appBarText),
           elevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
+          actions: [
+            IconButton(
+                icon: Icon(LineAwesomeIcons.eraser, color: Colors.blue),
+                onPressed: () {
+                  baseController.apresentacao = null;
+                  baseController.nome = null;
+                  baseController.classe = null;
+                  controller.idadeController.text = '';
+                  controller.pesoController.text = '';
+                  setState(() {});
+                }),
+          ],
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -247,7 +261,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     Widget okButton = FlatButton(
       child: Text("OK"),
       onPressed: () {
-        baseController.updateCurrentIndex(0);
         baseController.apresentacao = null;
         baseController.nome = null;
         baseController.classe = null;

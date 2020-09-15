@@ -186,7 +186,6 @@ abstract class _HomeControllerBase with Store {
 
   Future<String> getMedicamento(String nome, String idade, String apresentacao,
       double peso, int classeId) async {
-    print(peso);
     listNomes.clear();
     listNomesId.clear();
     var query = """
@@ -299,7 +298,7 @@ abstract class _HomeControllerBase with Store {
           ? dosagem = (doseMax / 1)
           : dosagem = (dose * doseml) / dosemg;
       return resultado =
-          'Para esse paciente é indicado $dosagem ml, $observacao. Fonte: $fonteMed';
+          'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} ml, $observacao. Fonte: $fonteMed';
     } else if (tipoApresentacao == 'anestesico') {
       ((doseReferencia * peso) >= doseMax)
           ? dose = (doseMax / 1)
@@ -325,29 +324,49 @@ abstract class _HomeControllerBase with Store {
       } else {
         if (tipoApresentacao == 'comprimido_m') {
           return resultado =
-              'Para esse paciente é indicado $dosagem comprimido, $observacao. Fonte: $fonteMed';
+              'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} comprimido, $observacao. Fonte: $fonteMed';
         } else if (tipoApresentacao == 'capsula_m') {
           return resultado =
-              'Para esse paciente é indicado $dosagem capsula, $observacao. Fonte: $fonteMed';
+              'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} capsula, $observacao. Fonte: $fonteMed';
         } else {
           return resultado =
-              'Para esse paciente é indicado $dosagem dragea, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+              'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} dragea, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
         }
       }
     } else if (tipoApresentacao == 'suspensao_m') {
-      dose = doseReferencia * peso;
-      dosagem = (dose * doseml) / dosemg / (24 / tempo);
-      return resultado =
-          'Para esse paciente é indicado $dosagem ml, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+      if (nomeSelecionado == 'Midazolam') {
+        dosagem = doseApresentacao * peso;
+        return resultado =
+            'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} ml, $observacao. Fonte: $fonteMed';
+      } else {
+        var dose2;
+        dose2 = doseReferencia * peso;
+        (dose2 >= doseMax) ? dose = (doseMax / 1) : dose = dose2;
+        dosagem = (dose * doseml) / dosemg / (24 / tempo);
+        return resultado =
+            'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} ml, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+      }
     } else if (tipoApresentacao == 'solucao_m') {
       (doseMax <= peso) ? dosagem = (doseMax / 1) : dosagem = peso;
       return resultado =
-          'Para esse paciente é indicado $dosagem gotas, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+          'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} gotas, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
     } else if (tipoApresentacao == 'elixir') {
       dose = doseReferencia * peso;
       dosagem = dose / (dosemg / doseml) / (24 / tempo);
       return resultado =
-          'Para esse paciente é indicado $dosagem ml, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+          'Para esse paciente é indicado ${dosagem.toStringAsFixed(2)} ml, de $tempo em $tempo horas, $observacao. Fonte: $fonteMed';
+    } else if (tipoApresentacao == 'composto') {
+      if (nomeSelecionado == 'Fluconazol') {
+        var dose1 = doseApresentacao * peso;
+        var dose2 = doseReferencia * peso;
+        return resultado =
+            'Para esse paciente é indicado dose única de $dose1 mg no primeiro dia , e doses únicas diárias de $dose2 mg durante 2 semanas, Fonte: $fonteMed';
+      }
+    } else if (tipoApresentacao == 'gel') {
+      dose = doseReferencia * peso;
+      dosagem = dose / (dosemg / doseml) / (24 / tempo);
+      return resultado =
+          'Para esse paciente é indicado $observacao, de $tempo em $tempo horas. Fonte: $fonteMed';
     }
     return resultado;
   }

@@ -17,7 +17,7 @@ class BasePage extends StatefulWidget {
 
 class _BasePageState extends State<BasePage> {
   //use 'controller' variable to access controller
-  List widgetOptions = [MaisModule(), HomeModule(), SobreModule()];
+  List widgetOptions = [SobreModule(), HomeModule(), MaisModule()];
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,12 @@ class _BasePageState extends State<BasePage> {
           selectedItemColor: Colors.blue,
           items: [
             BottomNavigationBarItem(
+                icon: Icon(LineAwesomeIcons.paste), title: Text('Sobre')),
+            BottomNavigationBarItem(
+                icon: Icon(LineAwesomeIcons.home), title: Text('Prescrição')),
+            BottomNavigationBarItem(
                 icon: Icon(LineAwesomeIcons.trophy),
                 title: Text('Mais pesquisados')),
-            BottomNavigationBarItem(
-                icon: Icon(LineAwesomeIcons.home), title: Text('Home')),
-            BottomNavigationBarItem(
-                icon: Icon(LineAwesomeIcons.paste), title: Text('Sobre'))
           ]);
     });
   }
