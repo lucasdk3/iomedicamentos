@@ -10,10 +10,25 @@ TextStyle letraBranca = TextStyle(
     fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.white);
 TextStyle letraAzul = TextStyle(
     fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.blue);
+TextStyle letraAzul2 = TextStyle(
+    fontFamily: "WorkSansSemiBold", fontSize: 24.0, color: Colors.blue);
 TextStyle letraPreta = TextStyle(
     fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.black);
 TextStyle letraPreta2 = TextStyle(
-    fontFamily: "WorkSansSemiBold", fontSize: 20.0, color: Colors.black);
+    fontFamily: "WorkSansSemiBold",
+    fontSize: 24.0,
+    color: Colors.black,
+    fontWeight: FontWeight.bold);
+TextStyle letraPreta3 = TextStyle(
+    fontFamily: "WorkSansSemiBold",
+    fontSize: 20.0,
+    color: Colors.black,
+    fontWeight: FontWeight.w400);
+TextStyle letraPreta4 = TextStyle(
+    fontFamily: "WorkSansSemiBold",
+    fontSize: 24.0,
+    color: Colors.black,
+    fontWeight: FontWeight.w400);
 Color selectedColor = Colors.white;
 Color drawerBackgroundColor = Colors.white10;
 BoxDecoration buttonDecoration = new BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/utils/constants.dart';
@@ -30,27 +31,32 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.8,
+              maxHeight: MediaQuery.of(context).size.height * 0.9,
               maxWidth: 800,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  textSobre,
-                  textAlign: TextAlign.justify,
-                  style: letraPreta2,
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                button1(),
-                SizedBox(
-                  height: 24,
-                ),
-                button(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    textSobre,
+                    textAlign: TextAlign.justify,
+                    style: letraPreta3,
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  button1(),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  button(),
+                  SizedBox(
+                    height: 24,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -117,50 +123,69 @@ class _SobrePageState extends ModularState<SobrePage, SobreController> {
     );
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
-      title: Text("Autores", style: letraAzul),
-      content: Column(
-        children: <Widget>[
-          Text(
-            texto1,
-            textAlign: TextAlign.justify,
-            style: letraPreta2,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Text(
-            texto2,
-            textAlign: TextAlign.justify,
-            style: letraPreta2,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Text(
-            texto3,
-            textAlign: TextAlign.justify,
-            style: letraPreta2,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Text(
-            texto4,
-            textAlign: TextAlign.justify,
-            style: letraPreta2,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Text(
-            texto5,
-            textAlign: TextAlign.justify,
-            style: letraPreta2,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-        ],
+      title: Text("Autores", style: letraAzul2),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                    text: texto1n,
+                    style: letraPreta2,
+                    children: <TextSpan>[
+                      TextSpan(text: texto1, style: letraPreta4)
+                    ])),
+            SizedBox(
+              height: 12,
+            ),
+            RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                    text: texto2n,
+                    style: letraPreta2,
+                    children: <TextSpan>[
+                      TextSpan(text: texto2, style: letraPreta4)
+                    ])),
+            SizedBox(
+              height: 12,
+            ),
+            RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                    text: texto3n,
+                    style: letraPreta2,
+                    children: <TextSpan>[
+                      TextSpan(text: texto3, style: letraPreta4)
+                    ])),
+            SizedBox(
+              height: 12,
+            ),
+            RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                    text: texto4n,
+                    style: letraPreta2,
+                    children: <TextSpan>[
+                      TextSpan(text: texto4, style: letraPreta4)
+                    ])),
+            SizedBox(
+              height: 12,
+            ),
+            RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                    text: texto5n,
+                    style: letraPreta2,
+                    children: <TextSpan>[
+                      TextSpan(text: texto5, style: letraPreta4)
+                    ])),
+            SizedBox(
+              height: 12,
+            ),
+          ],
+        ),
       ),
       actions: [
         okButton,

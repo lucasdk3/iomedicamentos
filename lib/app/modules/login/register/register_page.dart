@@ -31,22 +31,14 @@ class _RegisterPageState
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 40,
-              ),
-              logo(),
-              SizedBox(
-                height: 40,
-              ),
               Stack(
                 children: [
                   forms(),
                   buttons(),
                 ],
-              ),
-              SizedBox(
-                height: 40,
               ),
             ],
           ),
