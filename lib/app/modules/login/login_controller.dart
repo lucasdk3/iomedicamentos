@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../utils/theme.dart';
+
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -69,7 +71,7 @@ abstract class _LoginControllerBase with Store {
       Modular.to.pushReplacementNamed('/login/base');
     } catch (e) {
       Fluttertoast.showToast(
-          msg: 'Email ou senha inválidos', backgroundColor: Colors.blue);
+          msg: 'Email ou senha inválidos', backgroundColor: primary);
       print(e);
       Fluttertoast.showToast(msg: e);
     }

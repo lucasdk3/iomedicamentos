@@ -3,6 +3,8 @@ import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/theme.dart';
+
 class MaisItem extends StatelessWidget {
   final String nome;
   final int quantidade;
@@ -24,7 +26,7 @@ class MaisItem extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           radius: 26,
-          backgroundColor: Colors.blue,
+          backgroundColor: primary,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

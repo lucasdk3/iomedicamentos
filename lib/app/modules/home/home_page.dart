@@ -1,7 +1,9 @@
 import 'package:combos/combos.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:iomedicamentos/app/utils/theme.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
@@ -30,7 +32,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           backgroundColor: Colors.transparent,
           actions: [
             IconButton(
-                icon: Icon(LineAwesomeIcons.eraser, color: Colors.blue),
+                icon: Icon(LineAwesomeIcons.eraser, color: primary),
                 onPressed: () {
                   baseController.apresentacao = null;
                   baseController.nome = null;
@@ -120,10 +122,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                           child: Text(dropDowmStringItem),
                         );
                       }).toList(),
-                      onChanged: (String classeSelecionada) {
+                      onChanged: (String classeSelecionada) async {
                         baseController.classe = classeSelecionada;
-                        controller.setClasse(classeSelecionada);
-                        controller.getNomes(controller.classeId);
+                        await controller.setClasse(classeSelecionada);
+                        await controller.getNomes(controller.classeId);
+                        print(controller.listNomes);
                       },
                       hint: Text('Escolha uma classe (obrigatório)'),
                       value: baseController.classe,
@@ -151,61 +154,73 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   context: context,
                   controller: controller.pesoController,
                   validator: 'Por favor, informe o peso do Paciente',
-                  hint: 'Peso em Kg, (não obrigatório)',
+                  hint: 'Peso em Kg (não obrigatório)',
                   onChanged: controller.setPeso,
                 );
               }),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Observer(builder: (_) {
-                return TypeaheadCombo<String>(
-                  selected: baseController.nome,
-                  getList: (text) async {
-                    return await controller.getNomesSuggestions(text);
+            Observer(builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownSearch<String>(
+                  label: "Medicamentos",
+                  items: controller.listNomes,
+                  mode: Mode.MENU,
+                  selectedItem: baseController.nome,
+                  popupItemBuilder: (context, item, isSelected) {
+                    return Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          item,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    );
                   },
-                  itemBuilder: (context, parameters, item, selected, text) =>
-                      ListTile(title: Text(item ?? '<Empty>')),
-                  onSelectedChanged: (item) async {
-                    setState(() {
-                      controller.nomeSelecionado = item;
-                      baseController.nome = item;
-                      controller.getApresentacao(controller.nomeSelecionado,
-                          controller.idadeString, controller.classeId);
-                    });
+                  onChanged: (String data) async {
+                    controller.nomeSelecionado = data;
+                    baseController.nome = data;
+                    if (controller.idadeString == null) {
+                      controller.nomeSelecionado = '';
+                      baseController.nome = '';
+                      Fluttertoast.showToast(msg: 'Digite a idade do paciente');
+                    } else {
+                      await controller.getApresentacao(
+                          controller.nomeSelecionado,
+                          controller.idadeString,
+                          controller.classeId);
+                    }
                   },
-                  getItemText: (item) => item,
-                  decoration: const InputDecoration(
-                    hintText: 'Medicamento (obrigatório)',
-                    border: OutlineInputBorder(),
-                  ),
-                );
-              }),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Observer(builder: (_) {
-                return TypeaheadCombo<String>(
-                  selected: baseController.apresentacao,
-                  getList: (text) async {
-                    return await controller.getApresentacaoSuggestions(text);
+                ),
+              );
+            }),
+            Observer(builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownSearch<String>(
+                  label: "Apresentação",
+                  selectedItem: baseController.apresentacao,
+                  items: controller.listApresentacoes,
+                  mode: Mode.MENU,
+                  popupItemBuilder: (context, item, isSelected) {
+                    return Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          item,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    );
                   },
-                  itemBuilder: (context, parameters, item, selected, text) =>
-                      ListTile(title: Text(item ?? '<Empty>')),
-                  onSelectedChanged: (item) async {
-                    setState(() {
-                      controller.apresentacaoSelecionada = item;
-                      baseController.apresentacao = item;
-                    });
+                  onChanged: (String data) async {
+                    controller.apresentacaoSelecionada = data;
+                    baseController.apresentacao = data;
                   },
-                  getItemText: (item) => item,
-                  decoration: const InputDecoration(
-                    hintText: 'Apresentação (obrigatório)',
-                    border: OutlineInputBorder(),
-                  ),
-                );
-              }),
-            )
+                ),
+              );
+            }),
           ],
         ),
       ),

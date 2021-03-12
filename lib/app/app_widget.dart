@@ -3,6 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iomedicamentos/app/modules/base/base_controller.dart';
 import 'package:provider/provider.dart';
 
+import 'utils/theme.dart';
+
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,7 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: Modular.navigatorKey,
         title: 'iomedicamentos',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: buildLightTheme(),
         initialRoute: '/',
         onGenerateRoute: Modular.generateRoute,
       ),

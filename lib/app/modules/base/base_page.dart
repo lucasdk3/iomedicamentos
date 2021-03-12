@@ -5,6 +5,7 @@ import 'package:iomedicamentos/app/modules/mais/mais_module.dart';
 import 'package:iomedicamentos/app/modules/sobre/sobre_module.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:provider/provider.dart';
+import '../../utils/theme.dart';
 import 'base_controller.dart';
 
 class BasePage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _BasePageState extends State<BasePage> {
           backgroundColor: Colors.transparent,
           currentIndex: controller.currentIndex,
           onTap: (value) => controller.updateCurrentIndex(value),
-          selectedItemColor: Colors.blue,
+          selectedItemColor: primary,
           items: [
             BottomNavigationBarItem(
                 icon: Icon(LineAwesomeIcons.paste), title: Text('Sobre')),

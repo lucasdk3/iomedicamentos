@@ -147,8 +147,8 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  Future<List> getNomesSuggestions(String query) async {
-    List<String> nomeSugestao = List();
+  Future<List<String>> getNomesSuggestions(String query) async {
+    List<String> nomeSugestao = [];
     nomeSugestao.clear();
     nomeSugestao.addAll(listNomes);
     nomeSugestao
@@ -156,7 +156,7 @@ abstract class _HomeControllerBase with Store {
     return nomeSugestao;
   }
 
-  Future<dynamic> getApresentacao(
+  Future<List<String>> getApresentacao(
       String nome, String idade, int classeId) async {
     listApresentacoes.clear();
     var query = """

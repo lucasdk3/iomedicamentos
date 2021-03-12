@@ -1,54 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-Color primary = Colors.blue;
-TextStyle appBarText = TextStyle(fontSize: 24, color: primary);
+Color primary = Color(0xff751d11);
+TextStyle appBarText = GoogleFonts.poppins(fontSize: 24, color: primary);
 TextStyle listTitleDefaultTextStyle =
     TextStyle(color: Colors.white, fontSize: 16.0);
 TextStyle listTitleSelectedTextStyle =
     TextStyle(color: Colors.white, fontSize: 16.0);
-TextStyle letraBranca = TextStyle(
-    fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.white);
-TextStyle letraAzul = TextStyle(
-    fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.blue);
-TextStyle letraAzul2 = TextStyle(
-    fontFamily: "WorkSansSemiBold", fontSize: 24.0, color: Colors.blue);
-TextStyle letraPreta = TextStyle(
-    fontFamily: "WorkSansSemiBold", fontSize: 16.0, color: Colors.black);
-TextStyle letraPreta2 = TextStyle(
-    fontFamily: "WorkSansSemiBold",
-    fontSize: 24.0,
-    color: Colors.black,
-    fontWeight: FontWeight.bold);
-TextStyle letraPreta3 = TextStyle(
-    fontFamily: "WorkSansSemiBold",
-    fontSize: 20.0,
-    color: Colors.black,
-    fontWeight: FontWeight.w400);
-TextStyle letraPreta4 = TextStyle(
-    fontFamily: "WorkSansSemiBold",
-    fontSize: 24.0,
-    color: Colors.black,
-    fontWeight: FontWeight.w400);
+TextStyle letraBranca =
+    GoogleFonts.poppins(fontSize: 16.0, color: Colors.white);
+TextStyle letraAzul = GoogleFonts.poppins(fontSize: 16.0, color: primary);
+TextStyle letraAzul2 = GoogleFonts.poppins(fontSize: 24.0, color: primary);
+TextStyle letraPreta = GoogleFonts.poppins(fontSize: 16.0, color: Colors.black);
+TextStyle letraPreta2 = GoogleFonts.poppins(
+    fontSize: 24.0, color: Colors.black, fontWeight: FontWeight.bold);
+TextStyle letraPreta3 = GoogleFonts.poppins(
+    fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.w400);
+TextStyle letraPreta4 = GoogleFonts.poppins(
+    fontSize: 24.0, color: Colors.black, fontWeight: FontWeight.w400);
 Color selectedColor = Colors.white;
 Color drawerBackgroundColor = Colors.white10;
 BoxDecoration buttonDecoration = new BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(5.0)),
   boxShadow: <BoxShadow>[
     BoxShadow(
-      color: Colors.lightBlueAccent,
+      color: primary,
       offset: Offset(1.0, 6.0),
       blurRadius: 20.0,
     ),
     BoxShadow(
-      color: Colors.blue,
+      color: primary,
       offset: Offset(1.0, 6.0),
       blurRadius: 20.0,
     ),
   ],
   gradient: new LinearGradient(
-      colors: [Colors.lightBlueAccent, Colors.blue],
+      colors: [primary, primary],
       begin: const FractionalOffset(0.2, 0.2),
       end: const FractionalOffset(1.0, 1.0),
       stops: [0.0, 1.0],
       tileMode: TileMode.clamp),
 );
+
+LinearGradient darkBackground = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Colors.grey[800], Colors.black],
+    stops: [0.1, 1]);
+LinearGradient lightGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Colors.white, Colors.white38],
+    stops: [0.1, 1]);
+
+ThemeData buildDarkTheme() {
+  final ThemeData base = ThemeData();
+  return base.copyWith(
+    primaryColor: Color(0xff2E2781),
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    buttonTheme: ButtonThemeData(
+      textTheme: ButtonTextTheme.primary,
+    ),
+    iconTheme: IconThemeData(color: Colors.white),
+    accentColor: Colors.teal[500],
+    buttonColor: Colors.teal[500],
+    hintColor: Colors.white,
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(
+          color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w300),
+    ),
+  );
+}
+
+ThemeData buildLightTheme() {
+  final ThemeData base = ThemeData();
+  return base.copyWith(
+    primaryColor: Color(0xff2E2781),
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    iconTheme: IconThemeData(color: Colors.white),
+    accentColor: Colors.teal[500],
+    buttonColor: Colors.teal[500],
+    hintColor: Colors.black,
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(
+          color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w300),
+    ),
+  );
+}

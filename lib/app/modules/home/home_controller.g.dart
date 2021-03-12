@@ -453,7 +453,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
       AsyncAction('_HomeControllerBase.getNomesSuggestions');
 
   @override
-  Future<List<dynamic>> getNomesSuggestions(String query) {
+  Future<List<String>> getNomesSuggestions(String query) {
     return _$getNomesSuggestionsAsyncAction
         .run(() => super.getNomesSuggestions(query));
   }

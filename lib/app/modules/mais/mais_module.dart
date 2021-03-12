@@ -8,9 +8,9 @@ class MaisModule extends WidgetModule {
   List<Bind> get binds => [];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => MaisPage()),
-        Router('/', child: (_, args) => MaisPage()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => MaisPage()),
+        ModularRouter('/', child: (_, args) => MaisPage()),
       ];
 
   static Inject get to => Inject<MaisModule>.of();

@@ -1,4 +1,4 @@
-package com.origemstudio.iomedicamentos
+package com.unisep.posologuia
 
 import io.flutter.embedding.android.FlutterActivity
 

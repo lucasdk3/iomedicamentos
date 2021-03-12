@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../utils/theme.dart';
+
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
@@ -87,7 +89,7 @@ abstract class _RegisterControllerBase with Store {
       Modular.to.pop();
     } catch (e) {
       Fluttertoast.showToast(
-          msg: 'Email ou senha inválidos', backgroundColor: Colors.blue);
+          msg: 'Email ou senha inválidos', backgroundColor: primary);
       print(e);
       Fluttertoast.showToast(msg: e);
     }

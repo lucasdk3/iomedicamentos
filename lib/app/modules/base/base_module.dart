@@ -22,9 +22,9 @@ class BaseModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => BasePage()),
-        Router('/', child: (_, args) => BasePage()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => BasePage()),
+        ModularRouter('/', child: (_, args) => BasePage()),
       ];
 
   static Inject get to => Inject<BaseModule>.of();

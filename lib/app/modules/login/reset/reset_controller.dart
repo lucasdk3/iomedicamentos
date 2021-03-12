@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../utils/theme.dart';
+
 part 'reset_controller.g.dart';
 
 class ResetController = _ResetControllerBase with _$ResetController;
@@ -47,8 +49,7 @@ abstract class _ResetControllerBase with Store {
           msg: 'Senha resetada com sucesso, verifique seu e-mail');
       Modular.to.pop();
     } catch (e) {
-      Fluttertoast.showToast(
-          msg: 'Email inválido', backgroundColor: Colors.blue);
+      Fluttertoast.showToast(msg: 'Email inválido', backgroundColor: primary);
       print(e);
       Fluttertoast.showToast(msg: e);
     }

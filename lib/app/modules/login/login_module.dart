@@ -3,6 +3,7 @@ import 'package:iomedicamentos/app/modules/base/base_module.dart';
 import 'package:iomedicamentos/app/modules/login/login_page.dart';
 import 'package:iomedicamentos/app/modules/login/register/register_module.dart';
 import 'package:iomedicamentos/app/modules/login/reset/reset_module.dart';
+import 'package:iomedicamentos/app/modules/termos/termos_module.dart';
 import 'package:iomedicamentos/app/utils/customHasuraConnect.dart';
 
 import 'reset/reset_controller.dart';
@@ -22,12 +23,13 @@ class LoginModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => LoginPage()),
-        Router('/', child: (_, args) => LoginPage()),
-        Router('/base', module: BaseModule()),
-        Router('/register', module: RegisterModule()),
-        Router('/reset', module: ResetModule()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => LoginPage()),
+        ModularRouter('/', child: (_, args) => LoginPage()),
+        ModularRouter('/base', module: BaseModule()),
+        ModularRouter('/register', module: RegisterModule()),
+        ModularRouter('/reset', module: ResetModule()),
+        ModularRouter('/termos', module: TermosModule()),
       ];
 
   static Inject get to => Inject<LoginModule>.of();

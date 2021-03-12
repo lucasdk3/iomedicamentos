@@ -8,10 +8,10 @@ class SobreModule extends WidgetModule {
   List<Bind> get binds => [];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => SobrePage()),
-        Router('/', child: (_, args) => SobrePage()),
-        Router('/login', module: LoginModule()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => SobrePage()),
+        ModularRouter('/', child: (_, args) => SobrePage()),
+        ModularRouter('/login', module: LoginModule()),
       ];
 
   static Inject get to => Inject<SobreModule>.of();
