@@ -7,10 +7,12 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final HasuraConnect _hasuraConnect;
   final FirebaseAuth auth;
 
-  _HomeControllerBase(this._hasuraConnect, this.auth);
+  _HomeControllerBase(this.auth);
+
+  HasuraConnect connect =
+      HasuraConnect('https://iomedicamentos.herokuapp.com/v1/graphql');
 
   @observable
   String classe;
@@ -130,8 +132,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc =
-        await _hasuraConnect.query(query, variables: {"classeId": classeId});
+    var doc = await connect.query(query, variables: {"classeId": classeId});
     if (doc["data"]["nome_medicamentos"].isEmpty) {
       print('vazio');
     } else {
@@ -166,7 +167,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.query(query,
+    var doc = await connect.query(query,
         variables: {"nome": nome, "idade": idade, "classeId": classeId});
     if (doc["data"]["medicamentos"].isEmpty) {
       print('vazio');
@@ -210,7 +211,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.query(query, variables: {
+    var doc = await connect.query(query, variables: {
       "nome": nome,
       "idade": idade,
       "apresentacao": apresentacao,
@@ -383,7 +384,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.query(query, variables: {
+    var doc = await connect.query(query, variables: {
       "id": id,
       "userId": userId,
     });
@@ -409,7 +410,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.mutation(query, variables: {
+    var doc = await connect.mutation(query, variables: {
       "id": id,
       "userId": userId,
     });
@@ -425,7 +426,7 @@ abstract class _HomeControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.mutation(query, variables: {
+    var doc = await connect.mutation(query, variables: {
       "id": id,
     });
     return doc;

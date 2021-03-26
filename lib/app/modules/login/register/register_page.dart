@@ -104,7 +104,7 @@ class _RegisterPageState
                             child: Column(children: <Widget>[
                               textForm(
                                 context: context,
-                                icon: LineAwesomeIcons.envelope,
+                                icon: LineAwesomeIcons.user,
                                 obscure: false,
                                 hint: 'Nome',
                                 onChanged: controller.changeNome,

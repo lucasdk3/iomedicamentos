@@ -7,6 +7,7 @@ TextStyle listTitleDefaultTextStyle =
     TextStyle(color: Colors.white, fontSize: 16.0);
 TextStyle listTitleSelectedTextStyle =
     TextStyle(color: Colors.white, fontSize: 16.0);
+
 TextStyle letraBranca =
     GoogleFonts.poppins(fontSize: 16.0, color: Colors.white);
 TextStyle letraAzul = GoogleFonts.poppins(fontSize: 16.0, color: primary);
@@ -20,6 +21,7 @@ TextStyle letraPreta4 = GoogleFonts.poppins(
     fontSize: 24.0, color: Colors.black, fontWeight: FontWeight.w400);
 Color selectedColor = Colors.white;
 Color drawerBackgroundColor = Colors.white10;
+
 BoxDecoration buttonDecoration = new BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(5.0)),
   boxShadow: <BoxShadow>[
@@ -42,21 +44,10 @@ BoxDecoration buttonDecoration = new BoxDecoration(
       tileMode: TileMode.clamp),
 );
 
-LinearGradient darkBackground = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [Colors.grey[800], Colors.black],
-    stops: [0.1, 1]);
-LinearGradient lightGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [Colors.white, Colors.white38],
-    stops: [0.1, 1]);
-
 ThemeData buildDarkTheme() {
   final ThemeData base = ThemeData();
   return base.copyWith(
-    primaryColor: Color(0xff2E2781),
+    primaryColor: Color(0xff751d11),
     textTheme: GoogleFonts.poppinsTextTheme(),
     buttonTheme: ButtonThemeData(
       textTheme: ButtonTextTheme.primary,
@@ -65,27 +56,17 @@ ThemeData buildDarkTheme() {
     accentColor: Colors.teal[500],
     buttonColor: Colors.teal[500],
     hintColor: Colors.white,
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(
-          color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w300),
-    ),
   );
 }
 
 ThemeData buildLightTheme() {
   final ThemeData base = ThemeData();
   return base.copyWith(
-    primaryColor: Color(0xff2E2781),
+    primaryColor: Color(0xff751d11),
     textTheme: GoogleFonts.poppinsTextTheme(),
     iconTheme: IconThemeData(color: Colors.white),
-    accentColor: Colors.teal[500],
-    buttonColor: Colors.teal[500],
+    accentColor: Color(0xff751d11),
+    buttonColor: Color(0xff751d11),
     hintColor: Colors.black,
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(
-          color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w300),
-    ),
   );
 }

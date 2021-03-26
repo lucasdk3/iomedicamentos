@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1061946519762",
-    "firebase_url": "https://iomedicamentos.firebaseio.com",
-    "project_id": "iomedicamentos",
-    "storage_bucket": "iomedicamentos.appspot.com"
+    "project_number": "841597732619",
+    "project_id": "posologuia",
+    "storage_bucket": "posologuia.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1061946519762:android:bc0ff4ce1b2d7eec38bd0b",
+        "mobilesdk_app_id": "1:841597732619:android:a7dc9e0a52be73a18d040e",
         "android_client_info": {
           "package_name": "com.unisep.posologuia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1061946519762-iml2rgbqjjqkr0pi45afa5a8q3eqgd0d.apps.googleusercontent.com",
+          "client_id": "841597732619-9dvfcouri7m0d2d7gppjkv782k57di9g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCZKmGJlJI5KFaaIdfZKa9Zg1PHvFFhgA"
+          "current_key": "AIzaSyCQCFHCqxUOZby2NW7rJXC-M5chI0zHnls"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1061946519762-iml2rgbqjjqkr0pi45afa5a8q3eqgd0d.apps.googleusercontent.com",
+              "client_id": "841597732619-9dvfcouri7m0d2d7gppjkv782k57di9g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

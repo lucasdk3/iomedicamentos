@@ -12,9 +12,8 @@ part 'register_controller.g.dart';
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
-  final HasuraConnect _hasuraConnect;
-
-  _RegisterControllerBase(this._hasuraConnect);
+  HasuraConnect connect =
+      HasuraConnect('https://iomedicamentos.herokuapp.com/v1/graphql');
 
   @observable
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -107,7 +106,7 @@ abstract class _RegisterControllerBase with Store {
         }
       }
     """;
-    var doc = await _hasuraConnect.mutation(query, variables: {
+    var doc = await connect.mutation(query, variables: {
       "email": email,
       "nome": nome,
       "id": id,

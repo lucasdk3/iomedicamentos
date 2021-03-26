@@ -9,10 +9,11 @@ part 'mais_controller.g.dart';
 class MaisController = _MaisControllerBase with _$MaisController;
 
 abstract class _MaisControllerBase with Store {
-  final HasuraConnect _hasuraConnect;
   final FirebaseAuth auth;
+  HasuraConnect connect =
+      HasuraConnect('https://iomedicamentos.herokuapp.com/v1/graphql');
 
-  _MaisControllerBase(this._hasuraConnect, this.auth) {
+  _MaisControllerBase(this.auth) {
     getRanking();
   }
 
@@ -44,7 +45,7 @@ abstract class _MaisControllerBase with Store {
       }
     """;
 
-    var doc = await _hasuraConnect.query(query, variables: {
+    var doc = await connect.query(query, variables: {
       "userId": userId,
     });
 
